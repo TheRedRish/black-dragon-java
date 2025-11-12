@@ -4,8 +4,6 @@ import dk.acto.blackdragon.model.Model;
 import dk.acto.blackdragon.service.ModelFactory;
 import io.vavr.collection.List;
 
-import java.util.Arrays;
-
 public class ModelFactoryImpl implements ModelFactory<Model> {
     @Override
     public List<Model> parse(String string) {

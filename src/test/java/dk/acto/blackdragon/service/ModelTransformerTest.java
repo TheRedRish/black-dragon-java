@@ -2,6 +2,7 @@ package dk.acto.blackdragon.service;
 
 import dk.acto.blackdragon.model.Model;
 import dk.acto.blackdragon.model.Stats;
+import dk.acto.blackdragon.service.impl.ModelTransformerImpl;
 import io.vavr.collection.List;
 import org.testng.ITestContext;
 import org.testng.annotations.Test;
@@ -19,12 +20,7 @@ public class ModelTransformerTest {
 
         List<Model> models = (List<Model>) context.getAttribute("models");
 
-        ModelTransformer<Model, Stats> subject = new ModelTransformer<Model, Stats>() {
-            @Override
-            public Stats transform(List<Model> model) {
-                return null;
-            }
-        };
+        ModelTransformer<Model, Stats> subject = new ModelTransformerImpl();
 
         Stats result = subject.transform(models);
         assertNotNull(result);
