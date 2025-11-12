@@ -10,10 +10,11 @@ public class ModelFactoryImpl implements ModelFactory<Model> {
     @Override
     public List<Model> parse(String string) {
         String[] lines = string.split("\n");
+
         List<Model> models = List.empty();
 
-        for (String line : lines) {
-            String[] values = line.split(",");
+        for (int i = 1; i < lines.length; i++) {
+            String[] values = lines[i].split(",");
             Model model = Model.builder()
                     .id(Long.parseLong(values[0].trim()))
                     .weight(Double.parseDouble(values[1].trim()))
@@ -21,7 +22,7 @@ public class ModelFactoryImpl implements ModelFactory<Model> {
                     .inventory(Long.parseLong(values[3].trim()))
                     .build();
 
-            models.push(model);
+            models = models.append(model);
         }
         return models;
     }
