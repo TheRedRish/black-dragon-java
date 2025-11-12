@@ -10,17 +10,19 @@ public class ModelFactoryImpl implements ModelFactory<Model> {
     @Override
     public List<Model> parse(String string) {
         String[] lines = string.split("\n");
-        java.util.List<Model> models = Arrays.stream(lines)
-                .skip(1)
-                .map(line -> {
-                    String[] values = line.split(",");
-                    return Model.builder()
-                            .id(Long.parseLong(values[0].trim()))
-                            .weight(Double.parseDouble(values[1].trim()))
-                            .cost(Integer.parseInt(values[2].trim()))
-                            .inventory(Long.parseLong(values[3].trim()))
-                            .build();
-                }).toList();
-        return List.ofAll(models);
+        List<Model> models = List.empty();
+
+        for (String line : lines) {
+            String[] values = line.split(",");
+            Model model = Model.builder()
+                    .id(Long.parseLong(values[0].trim()))
+                    .weight(Double.parseDouble(values[1].trim()))
+                    .cost(Integer.parseInt(values[2].trim()))
+                    .inventory(Long.parseLong(values[3].trim()))
+                    .build();
+
+            models.push(model);
+        }
+        return models;
     }
 }
